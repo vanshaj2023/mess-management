@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: iiitbh-mess
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: MONGODB_DB
+        value: iiitbh_mess
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: SEED_DEMO_DATA
+        value: "false"
+      - key: ALLOW_DEMO_CLOCK
+        value: "false"
+      - key: SESSION_TTL_DAYS
+        value: "7"

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mess management for IIIT Bhubaneswar: weekly coupons, semester subscriptions and fingerprint entry across three messes.">
+  <meta name="theme-color" content="#07070a">
+  <title>IIIT Bhubaneswar Mess Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="aurora" aria-hidden="true"><span></span><span></span></div>
+  <div id="boot" class="boot" role="status" aria-label="Loading"><span class="boot-mark"></span></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <a class="brand" href="#/" aria-label="IIIT Bhubaneswar Mess, home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 3v7a2 2 0 0 0 2 2v9"/>
+          <path d="M10 3v7"/>
+          <path d="M6 3v7"/>
+          <path d="M17 3c-2 2-3 4.5-3 7.5 0 1.4 1 2.5 3 2.5v8"/>
+        </svg>
+      </span>
+      <span class="brand-text"><strong>IIIT-BH</strong> Mess</span>
+    </a>
+
+    <nav id="nav" class="nav" aria-label="Primary" hidden>
+      <div id="nav-links" class="nav-links"></div>
+      <span id="nav-bar" class="nav-bar" aria-hidden="true"></span>
+    </nav>
+
+    <div class="topbar-actions">
+      <button type="button" id="clock-chip" class="clock-chip" data-action="open-clock" title="Demo clock: jump to any time to test cut-offs">
+        <span class="clock-dot" aria-hidden="true"></span>
+        <span id="clock-text">Loading</span>
+      </button>
+      <button type="button" id="user-chip" class="user-chip" data-action="logout" title="Sign out" hidden>
+        <span id="user-initials" class="avatar" aria-hidden="true"></span>
+        <span class="user-label">Sign out</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="view-auth" class="view auth" hidden>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+
+      <div class="auth-hero">
+        <span class="eyebrow reveal">IIIT Bhubaneswar</span>
+        <h1 class="hero-title" aria-label="One account for all three messes.">
+          <span class="word">One</span> <span class="word">account</span> <span class="word">for</span> <span class="word">all</span> <span class="word">three</span> <span class="word">messes.</span>
+        </h1>
+        <p class="lead reveal">Buy weekly coupons, pay your semester plan and walk in with a touch of your finger.</p>
+
+        <ul class="mess-rules">
+          <li class="rule reveal" style="--tone: var(--pb)">
+            <span class="rule-dot"></span>
+            <div>
+              <strong>P Block Mess</strong>
+              <span>Semester plan, ₹17,000. Fingerprint entry. Compulsory for 1st year.</span>
+            </div>
+          </li>
+          <li class="rule reveal" style="--tone: var(--gf)">
+            <span class="rule-dot"></span>
+            <div>
+              <strong>Ground Floor Mess</strong>
+              <span>Semester plan, ₹17,000. Fingerprint entry. Compulsory for 2nd year.</span>
+            </div>
+          </li>
+          <li class="rule reveal" style="--tone: var(--ff)">
+            <span class="rule-dot"></span>
+            <div>
+              <strong>First Floor Mess</strong>
+              <span>Weekly coupons from ₹432, or book lunch and dinner in advance.</span>
+            </div>
+          </li>
+        </ul>
+        <p class="fine-print reveal">3rd and 4th year students and staff choose Ground Floor, First Floor or no mess.</p>
+      </div>
+
+      <div class="auth-card card glass reveal">
+        <div class="segmented segmented--full" role="tablist" aria-label="Account">
+          <button type="button" role="tab" id="tab-login" aria-selected="true" data-action="auth-tab" data-tab="login">Sign in</button>
+          <button type="button" role="tab" id="tab-register" aria-selected="false" data-action="auth-tab" data-tab="register">Create account</button>
+        </div>
+
+        <form id="login-form" class="form" data-form="login" novalidate>
+          <label class="field">
+            <span>Roll number or employee ID</span>
+            <input name="id" type="text" autocomplete="username" autocapitalize="characters" required placeholder="B526001">
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <input name="password" type="password" autocomplete="current-password" required placeholder="Your password">
+          </label>
+          <p class="field-error" data-error-for="login" role="alert"></p>
+          <button type="submit" class="btn btn--primary btn--block">Sign in</button>
+
+          <div class="demo-logins" id="demo-logins">
+            <span class="fine-print">Demo accounts, one click</span>
+            <div class="chip-row">
+              <button type="button" class="chip-btn" data-action="fill-demo" data-id="B526001" data-password="demo123">1st year, P Block</button>
+              <button type="button" class="chip-btn" data-action="fill-demo" data-id="B526002" data-password="demo123">1st year, fee due</button>
+              <button type="button" class="chip-btn" data-action="fill-demo" data-id="B525011" data-password="demo123">2nd year, Ground Floor</button>
+              <button type="button" class="chip-btn" data-action="fill-demo" data-id="B524021" data-password="demo123">3rd year, First Floor</button>
+              <button type="button" class="chip-btn" data-action="fill-demo" data-id="B523033" data-password="demo123">4th year, First Floor, no coupons</button>
+              <button type="button" class="chip-btn" data-action="fill-demo" data-id="B523032" data-password="demo123">4th year, no mess</button>
+              <button type="button" class="chip-btn" data-action="fill-demo" data-id="ADMIN" data-password="admin123">Mess office</button>
+            </div>
+          </div>
+        </form>
+
+        <form id="register-form" class="form" data-form="register" novalidate hidden>
+          <fieldset class="field choice-row">
+            <legend>I am a</legend>
+            <label class="choice"><input type="radio" name="category" value="student" checked><span>Student</span></label>
+            <label class="choice"><input type="radio" name="category" value="staff"><span>Staff</span></label>
+          </fieldset>
+
+          <label class="field">
+            <span>Full name</span>
+            <input name="name" type="text" autocomplete="name" required minlength="3" maxlength="60" placeholder="Aarav Mishra">
+            <small class="field-error" data-error-for="name"></small>
+          </label>
+
+          <div class="field-row">
+            <label class="field">
+              <span id="id-label">Roll number</span>
+              <input name="id" type="text" autocapitalize="characters" required maxlength="8" placeholder="B526001">
+              <small class="field-error" data-error-for="id"></small>
+            </label>
+            <label class="field" id="year-field">
+              <span>Year of study</span>
+              <select name="year" required>
+                <option value="">Select</option>
+                <option value="1">1st year</option>
+                <option value="2">2nd year</option>
+                <option value="3">3rd year</option>
+                <option value="4">4th year</option>
+              </select>
+              <small class="field-error" data-error-for="year"></small>
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Institute email</span>
+            <input name="email" type="email" autocomplete="email" required placeholder="b526001@iiit-bh.ac.in">
+            <small class="field-error" data-error-for="email"></small>
+          </label>
+
+          <label class="field">
+            <span>Mobile number</span>
+            <input name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="10" required placeholder="9437012345">
+            <small class="field-error" data-error-for="phone"></small>
+          </label>
+
+          <div class="field-row">
+            <label class="field">
+              <span>Password</span>
+              <input name="password" type="password" autocomplete="new-password" required minlength="8" placeholder="8+ characters">
+              <small class="field-error" data-error-for="password"></small>
+            </label>
+            <label class="field">
+              <span>Confirm password</span>
+              <input name="confirm" type="password" autocomplete="new-password" required placeholder="Repeat password">
+              <small class="field-error" data-error-for="confirm"></small>
+            </label>
+          </div>
+          <div class="strength" id="strength" data-level="0" aria-live="polite">
+            <i></i><i></i><i></i><i></i>
+            <em id="strength-label">Password strength</em>
+          </div>
+
+          <p class="notice" id="policy-preview"></p>
+          <button type="submit" class="btn btn--primary btn--block">Create account</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="view-app" class="view" hidden></section>
+  </main>
+
+  <footer class="footer">
+    <span>IWT Lab project, IIIT Bhubaneswar. Node, Express and MongoDB behind a plain HTML, CSS and JS frontend.</span>
+  </footer>
+
+  <dialog id="pay-dialog" aria-labelledby="pay-title">
+    <form id="pay-form" class="dialog-body form" data-form="pay" novalidate>
+      <header class="dialog-head">
+        <div>
+          <span class="eyebrow">Checkout</span>
+          <h2 id="pay-title">Pay</h2>
+        </div>
+        <button type="button" class="icon-btn" data-action="close-dialog" aria-label="Close">&times;</button>
+      </header>
+
+      <div id="pay-summary" class="pay-summary"></div>
+
+      <div class="segmented segmented--full" role="radiogroup" aria-label="Payment method">
+        <label><input type="radio" name="method" value="upi" checked><span>UPI</span></label>
+        <label><input type="radio" name="method" value="card"><span>Card</span></label>
+      </div>
+
+      <div id="pay-upi" class="pay-fields">
+        <label class="field">
+          <span>UPI ID</span>
+          <input name="upi" type="text" inputmode="email" autocomplete="off" placeholder="name@bank">
+          <small class="field-error" data-error-for="upi"></small>
+        </label>
+      </div>
+
+      <div id="pay-card" class="pay-fields" hidden>
+        <label class="field">
+          <span>Card number</span>
+          <input name="card" type="text" inputmode="numeric" autocomplete="off" maxlength="19" placeholder="1234 5678 9012 3456">
+          <small class="field-error" data-error-for="card"></small>
+        </label>
+        <div class="field-row">
+          <label class="field">
+            <span>Expiry</span>
+            <input name="expiry" type="text" inputmode="numeric" autocomplete="off" maxlength="5" placeholder="MM/YY">
+            <small class="field-error" data-error-for="expiry"></small>
+          </label>
+          <label class="field">
+            <span>CVV</span>
+            <input name="cvv" type="password" inputmode="numeric" autocomplete="off" maxlength="3" placeholder="123">
+            <small class="field-error" data-error-for="cvv"></small>
+          </label>
+        </div>
+      </div>
+
+      <p id="pay-error" class="field-error" role="alert"></p>
+      <button type="submit" id="pay-submit" class="btn btn--primary btn--block">Pay</button>
+      <p class="fine-print">Demo checkout. No real payment is made and card details are never stored.</p>
+    </form>
+  </dialog>
+
+  <dialog id="clock-dialog" aria-labelledby="clock-title">
+    <form id="clock-form" class="dialog-body form" data-form="clock">
+      <header class="dialog-head">
+        <div>
+          <span class="eyebrow">Demo clock</span>
+          <h2 id="clock-title">Jump to any moment</h2>
+        </div>
+        <button type="button" class="icon-btn" data-action="close-dialog" aria-label="Close">&times;</button>
+      </header>
+      <p class="muted">Booking cut-offs and meal windows depend on the time of day. Pick a moment and the whole app, server included, runs from there for this browser.</p>
+
+      <label class="field">
+        <span>Date and time (IST)</span>
+        <input type="datetime-local" name="when" required>
+      </label>
+
+      <div class="chip-row">
+        <button type="button" class="chip-btn" data-action="clock-preset" data-hour="8" data-minute="0">8:00 AM breakfast</button>
+        <button type="button" class="chip-btn" data-action="clock-preset" data-hour="8" data-minute="55">8:55 AM before lunch cut-off</button>
+        <button type="button" class="chip-btn" data-action="clock-preset" data-hour="9" data-minute="5">9:05 AM after lunch cut-off</button>
+        <button type="button" class="chip-btn" data-action="clock-preset" data-hour="13" data-minute="0">1:00 PM lunch</button>
+        <button type="button" class="chip-btn" data-action="clock-preset" data-hour="16" data-minute="55">4:55 PM before dinner cut-off</button>
+        <button type="button" class="chip-btn" data-action="clock-preset" data-hour="17" data-minute="5">5:05 PM after dinner cut-off</button>
+        <button type="button" class="chip-btn" data-action="clock-preset" data-hour="20" data-minute="0">8:00 PM dinner</button>
+        <button type="button" class="chip-btn" data-action="clock-preset" data-hour="10" data-minute="0" data-monday="true">Next Monday 10:00 AM</button>
+      </div>
+
+      <div class="dialog-actions">
+        <button type="button" class="btn btn--ghost" data-action="clock-live">Use live time</button>
+        <button type="submit" class="btn btn--primary">Apply</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title">
+    <form method="dialog" class="dialog-body">
+      <h2 id="confirm-title"></h2>
+      <p id="confirm-message" class="muted"></p>
+      <div class="dialog-actions">
+        <button type="submit" class="btn btn--ghost" value="no">Cancel</button>
+        <button type="submit" id="confirm-ok" class="btn btn--primary" value="yes">Confirm</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="sheet-dialog" aria-label="Receipt">
+    <div id="sheet-body" class="dialog-body"></div>
+  </dialog>
+
+  <div id="toasts" class="toasts" role="status" aria-live="polite"></div>
+
+  <script src="/vendor/gsap/gsap.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
